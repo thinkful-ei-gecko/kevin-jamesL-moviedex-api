@@ -2,14 +2,14 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const helmet = require('helmet')
+const helmet = require('helmet');
 const moviesData = require('./movies-data-small.json');
 
 const app = express();
 
 app.use(morgan('dev'));
 app.use(cors());
-ap.use(helmet());
+app.use(helmet());
 
 app.use(function validateBearerToken(req, res, next) {
   const apiToken = process.env.API_TOKEN;
@@ -31,7 +31,7 @@ app.get('/movie', (req, res) => {
       r.genre.toLowerCase().includes(genre.toLowerCase())
     );
   }
-  
+
   if (country) {
     response = response.filter((r) =>
       r.country.toLowerCase().includes(country.toLowerCase())
