@@ -24,13 +24,13 @@ app.get('/movie', (req, res) => {
   const { genre, country, avg_vote } = req.query;
   let response = moviesData;
 
-  if (genre) {
-    response = response.filter((r) =>
-      r.genre.toLowerCase().includes(genre.toLowerCase())
-    );
-  } else {
-    if ('genre' in req.query) {
-      return res.status(400).json({ error: 'Invalid genre' });
+  if ('genre' in req.query) {
+    if (genre) {
+      response = response.filter((r) =>
+        r.genre.toLowerCase().includes(genre.toLowerCase())
+      );
+    } else {
+      return res.status(400).json({ error: 'Genre cannot be blank' });
     }
   }
 
