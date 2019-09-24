@@ -22,7 +22,15 @@ app.use(cors());
 
 app.get('/movie', (req, res) => {
   const { genre, country, avg_vote } = req.query;
+  let response = moviesData;
 
+  if (genre) {
+    response = response.filter(r =>
+      r.genre.includes(genre.toLowerCase())
+    );
+  }
+
+  res.json(response);
 });
 
 const PORT = 8000;
