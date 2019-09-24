@@ -26,7 +26,7 @@ app.get('/movie', (req, res) => {
 
   if (genre) {
     response = response.filter(r =>
-      r.genre.includes(genre.toLowerCase())
+      r.genre.toLowerCase().includes(genre.toLowerCase())
     );
   }
 
