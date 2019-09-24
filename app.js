@@ -25,9 +25,23 @@ app.get('/movie', (req, res) => {
   let response = moviesData;
 
   if (genre) {
-    response = response.filter(r =>
+    response = response.filter((r) =>
       r.genre.toLowerCase().includes(genre.toLowerCase())
     );
+  } else {
+    if ('genre' in req.query) {
+      return res.status(400).json({ error: 'Invalid genre' });
+    }
+  }
+
+  if (country) {
+    response = response.filter((r) =>
+      r.country.toLowerCase().includes(country.toLowerCase())
+    );
+  }
+
+  if (avg_vote) {
+    response = response.filter((r) => r.avg_vote >= avg_vote);
   }
 
   res.json(response);
